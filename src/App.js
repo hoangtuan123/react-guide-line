@@ -18,7 +18,8 @@ class App extends Component {
         name: "Tuan Hoang",
         age: "12"
       }
-    ]
+    ],
+    showPerson: false
   }
 
   switchName(newName){
@@ -57,17 +58,28 @@ class App extends Component {
     })
   }
 
+  toggle(){
+    const showPerson = this.state.showPerson;
+    this.setState({showPerson: !showPerson});
+  }
+
   render() {
     return (
       <div className="App">
-        <button onClick={() => this.switchName('newName !')}>Click Change Name</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
-        <Person click={this.switchName.bind(this, "newName!!!!!")} 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age} 
-          changed={this.changeHanlder}
-          />
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
+        <button onClick={() => this.toggle()}>Click Change Name</button>
+        {
+          this.state.showPerson ? 
+          <div>
+              <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
+              <Person click={this.switchName.bind(this, "newName!!!!!")} 
+                name={this.state.persons[1].name} 
+                age={this.state.persons[1].age} 
+                changed={this.changeHanlder}
+                />
+              <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
+          </div> : null
+        }
+        
       </div>
     );
   }
