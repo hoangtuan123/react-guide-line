@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
-import Radium, { StyleRoot } from 'radium'
 
 class App extends Component {
 
@@ -69,13 +68,8 @@ class App extends Component {
 
   render() {
     let persons = null;
-    const style = {
-      backgroundColor: "red",
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
-    }
+
+    let btnClass = '';
 
     if(this.state.showPerson){
       persons = (
@@ -90,30 +84,24 @@ class App extends Component {
             })}
         </div>
       )
-      style.backgroundColor = "green";
-      style[':hover'] = {
-        backgroundColor: 'lightgreen',
-        color: 'white'
-      }
+      btnClass = classes.Red;
     }
 
-    const classes = [];
+    const assignClassed = [];
 
     if(this.state.persons.length <= 2)
-      classes.push('red');
+      assignClassed.push(classes.red);
     if(this.state.persons.length <= 1)
-      classes.push('bold');
+      assignClassed.push(classes.bold);
 
     return (
-      <StyleRoot>
-        <div className="App">
-          <p className={classes.join(' ')}>hello Reactjs</p>
-          <button style={style} onClick={() => this.toggle()}>Click Change Name</button>
+        <div className={classes.App}>
+          <p className={assignClassed.join(' ')}>hello Reactjs</p>
+          <button className={btnClass} onClick={() => this.toggle()}>Click Change Name</button>
           {persons}
         </div>
-      </StyleRoot>
     );
   }
 }
 
-export default Radium(App);
+export default App;

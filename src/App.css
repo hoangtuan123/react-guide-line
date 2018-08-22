@@ -33,5 +33,19 @@
 }
 
 .bold {
-  font-weight: bold
+  font-weight: bold;
+}
+
+
+.App button {
+  background-color: blue;
+}
+
+.App button.Red {
+  background-color: red;
+}
+
+.App button.Red:hover {
+  background-color: lightcoral;
+  color: bisque
 }
