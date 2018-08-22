@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person';
+import Radium, { StyleRoot } from 'radium'
 
 class App extends Component {
 
@@ -68,6 +69,14 @@ class App extends Component {
 
   render() {
     let persons = null;
+    const style = {
+      backgroundColor: "red",
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
+    }
+
     if(this.state.showPerson){
       persons = (
         <div>
@@ -81,16 +90,30 @@ class App extends Component {
             })}
         </div>
       )
+      style.backgroundColor = "green";
+      style[':hover'] = {
+        backgroundColor: 'lightgreen',
+        color: 'white'
+      }
     }
 
+    const classes = [];
+
+    if(this.state.persons.length <= 2)
+      classes.push('red');
+    if(this.state.persons.length <= 1)
+      classes.push('bold');
 
     return (
-      <div className="App">
-        <button onClick={() => this.toggle()}>Click Change Name</button>
-        {persons}
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <p className={classes.join(' ')}>hello Reactjs</p>
+          <button style={style} onClick={() => this.toggle()}>Click Change Name</button>
+          {persons}
+        </div>
+      </StyleRoot>
     );
   }
 }
 
-export default App;
+export default Radium(App);
